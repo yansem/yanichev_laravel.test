@@ -1,7 +1,7 @@
 <template>
     <div>
-        <router-link :to="{name: 'route1'}">Route1</router-link>
-        <router-link :to="{name: 'route2'}">Route2</router-link>
+        <router-link :to="{name: 'cat.index'}">Cats</router-link>
+        <router-link :to="{name: 'breed.index'}">Breeds</router-link>
     </div>
     <div>
         <router-view></router-view>
