@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'cats'], function () {
+    Route::get('/', \App\Http\Controllers\API\Cat\IndexController::class);
+    Route::post('/', \App\Http\Controllers\API\Cat\StoreController::class);
+    Route::patch('/{cat}', \App\Http\Controllers\API\Cat\UpdateController::class);
+    Route::delete('/{cat}', \App\Http\Controllers\API\Cat\DestroyController::class);
 });
