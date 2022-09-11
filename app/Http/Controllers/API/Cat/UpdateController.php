@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API\Cat;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cat;
-use Illuminate\Http\Request;
 
 class UpdateController extends Controller
 {

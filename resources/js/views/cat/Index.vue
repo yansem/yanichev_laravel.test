@@ -35,7 +35,6 @@ export default {
             axios.get('/api/cats')
                 .then( res => {
                     this.cats = res.data.data
-                    console.log(res);
                 })
         }
     }
