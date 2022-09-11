@@ -9,6 +9,11 @@ const router = createRouter({
             component: () => import('../views/cat/Index.vue')
         },
         {
+            path: '/cats/create',
+            name: 'cat.create',
+            component: () => import('../views/cat/Create.vue')
+        },
+        {
             path: '/breeds',
             name: 'breed.index',
             component: () => import('../views/breed/Index.vue')
