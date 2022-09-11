@@ -11,4 +11,9 @@ class Cat extends Model
 
     protected $guarded = false;
     protected $table = 'cats';
+
+    public function breed()
+    {
+        return $this->belongsTo(Breed::class);
+    }
 }

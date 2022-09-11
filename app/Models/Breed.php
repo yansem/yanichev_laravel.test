@@ -11,4 +11,9 @@ class Breed extends Model
 
     protected $guarded = false;
     protected $table = 'breeds';
+
+    public function cats()
+    {
+        return $this->hasMany(Cat::class);
+    }
 }

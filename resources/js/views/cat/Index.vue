@@ -9,10 +9,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr v-if="cats" v-for="cat in cats">
+                <td>{{ cat.name }}</td>
+                <td>{{ cat.age }}</td>
+                <td>{{ cat.breed.name }}</td>
             </tr>
             </tbody>
         </table>
@@ -21,7 +21,24 @@
 
 <script>
 export default {
-    name: "Index"
+    name: "Index",
+    data() {
+        return {
+            cats: []
+        }
+    },
+    mounted() {
+        this.getCats()
+    },
+    methods: {
+        getCats() {
+            axios.get('/api/cats')
+                .then( res => {
+                    this.cats = res.data.data
+                    console.log(res);
+                })
+        }
+    }
 }
 </script>
 
