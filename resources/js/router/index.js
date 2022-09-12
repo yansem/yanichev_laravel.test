@@ -18,6 +18,11 @@ const router = createRouter({
             name: 'breed.index',
             component: () => import('../views/breed/Index.vue')
         },
+        {
+            path: '/breeds/create',
+            name: 'breed.create',
+            component: () => import('../views/breed/Create.vue')
+        },
     ]
 })
 

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-link :to="{name: 'breed.create'}" class="btn btn-primary">Add</router-link>
         <table class="table">
             <thead>
             <tr>
