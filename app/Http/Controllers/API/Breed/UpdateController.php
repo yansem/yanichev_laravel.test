@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\API\Breed;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cat;
+use App\Http\Requests\API\Breed\UpdateRequest;
+use App\Models\Breed;
 
 class UpdateController extends Controller
 {
-    public function __invoke(Cat $cat)
+    public function __invoke(UpdateRequest $request, Breed $breed)
     {
-        return 'cats';
+        $data = $request->validated();
+        $breed->update($data);
+        return response()->json(['message' => 'OK']);
     }
 }

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\API\Breed;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cat;
+use App\Models\Breed;
 
 class DestroyController extends Controller
 {
-    public function __invoke(Cat $cat)
+    public function __invoke(Breed $breed)
     {
-        return 'cats';
+        $breed->delete();
+        return response()->json(['message' => 'OK']);
     }
 }
