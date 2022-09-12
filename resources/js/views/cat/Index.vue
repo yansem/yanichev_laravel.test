@@ -7,14 +7,33 @@
                 <th>Name</th>
                 <th>Age</th>
                 <th>Breed</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-if="cats" v-for="cat in cats">
-                <td>{{ cat.name }}</td>
-                <td>{{ cat.age }}</td>
-                <td>{{ cat.breed.name }}</td>
-            </tr>
+            <template v-if="cats" v-for="cat in cats">
+                <tr :class="isEdit(cat.id) ? 'd-none' : ''">
+                    <td>{{ cat.name }}</td>
+                    <td>{{ cat.age }}</td>
+                    <td>{{ cat.breed.name }}</td>
+                    <td>
+                        <a href="#" class="btn btn-success" @click.prevent="editCat(cat)">Edit</a>
+                    </td>
+                </tr>
+                <tr :class="isEdit(cat.id) ? '' : 'd-none'">
+                    <td><input v-model="name" type="text" class="form-control"></td>
+                    <td><input v-model="age" type="text" class="form-control"></td>
+                    <select v-model="breed" class="form-select">
+                        <template v-for="breed in breeds">
+                            <option :value="breed.id">{{ breed.name }}</option>
+                        </template>
+                    </select>
+                    <td>
+                        <a href="#" class="btn btn-success" @click.prevent="updateCat(cat.id)">Update</a>
+                    </td>
+                </tr>
+            </template>
+
             </tbody>
         </table>
     </div>
@@ -25,7 +44,12 @@ export default {
     name: "Index",
     data() {
         return {
-            cats: []
+            cats: [],
+            breeds: [],
+            name: '',
+            age: null,
+            breed: null,
+            catId: null
         }
     },
     mounted() {
@@ -36,6 +60,29 @@ export default {
             axios.get('/api/cats')
                 .then( res => {
                     this.cats = res.data.data
+                })
+        },
+        getBreeds() {
+            axios.get('/api/breeds')
+                .then( res => {
+                    this.breeds = res.data.data
+                })
+        },
+        editCat(cat) {
+            this.getBreeds()
+            this.catId = cat.id
+            this.name = cat.name
+            this.age = cat.age
+            this.breed = cat.breed.id
+        },
+        isEdit(id) {
+            return this.catId === id
+        },
+        updateCat(id) {
+            axios.patch(`/api/cats/${id}`, {name: this.name, age: this.age, breed_id: this.breed})
+                .then( res => {
+                    this.catId = false
+                    this.getCats()
                 })
         }
     }
