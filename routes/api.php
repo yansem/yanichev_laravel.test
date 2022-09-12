@@ -19,6 +19,7 @@ Route::group(['prefix' => 'cats'], function () {
     Route::post('/', \App\Http\Controllers\API\Cat\StoreController::class);
     Route::patch('/{cat}', \App\Http\Controllers\API\Cat\UpdateController::class);
     Route::delete('/{cat}', \App\Http\Controllers\API\Cat\DestroyController::class);
+    Route::get('/image', \App\Http\Controllers\API\Cat\ImageController::class);
 });
 Route::group(['prefix' => 'breeds'], function () {
     Route::get('/', \App\Http\Controllers\API\Breed\IndexController::class);

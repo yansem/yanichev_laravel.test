@@ -5,6 +5,7 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Image (click name)</th>
                 <th>Age</th>
                 <th>Breed</th>
                 <th>Actions</th>
@@ -13,7 +14,8 @@
             <tbody>
             <template v-if="cats" v-for="cat in cats">
                 <tr :class="isEdit(cat.id) ? 'd-none' : cat.breed.age_average === cat.age ? 'bg-warning' : ''">
-                    <td>{{ cat.name }}</td>
+                    <td><a href="#" @click.prevent="getImage(cat.id)">{{ cat.name }}</a></td>
+                    <td><img :src="cat.image" width="100" height="100" alt="" :class="cat.image ? '' : 'd-none'"></td>
                     <td>{{ cat.age }}</td>
                     <td>{{ cat.breed.name }}</td>
                     <td>
@@ -50,7 +52,8 @@ export default {
             name: '',
             age: null,
             breed: null,
-            catId: null
+            catId: null,
+            catImage: ''
         }
     },
     mounted() {
@@ -90,6 +93,17 @@ export default {
             axios.delete(`/api/cats/${id}`)
                 .then( res => {
                     this.getCats()
+                })
+        },
+        getImage(catId) {
+            axios.get('/api/cats/image')
+                .then( res => {
+                    this.cats.forEach( cat => {
+                        if (cat.id === catId) {
+                            cat.image = res.data[0].url;
+                        }
+                    })
+                    // this.catImage = res.data[0].url
                 })
         }
     }
