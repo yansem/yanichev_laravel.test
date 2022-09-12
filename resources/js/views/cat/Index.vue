@@ -18,6 +18,7 @@
                     <td>{{ cat.breed.name }}</td>
                     <td>
                         <a href="#" class="btn btn-success" @click.prevent="editCat(cat)">Edit</a>
+                        <a href="#" class="btn btn-danger" @click.prevent="deleteCat(cat.id)">Delete</a>
                     </td>
                 </tr>
                 <tr :class="isEdit(cat.id) ? '' : 'd-none'">
@@ -82,6 +83,12 @@ export default {
             axios.patch(`/api/cats/${id}`, {name: this.name, age: this.age, breed_id: this.breed})
                 .then( res => {
                     this.catId = false
+                    this.getCats()
+                })
+        },
+        deleteCat(id) {
+            axios.delete(`/api/cats/${id}`)
+                .then( res => {
                     this.getCats()
                 })
         }

@@ -9,6 +9,7 @@ class DestroyController extends Controller
 {
     public function __invoke(Cat $cat)
     {
-        return 'cats';
+        $cat->delete();
+        return response()->json(['message' => 'OK']);
     }
 }
