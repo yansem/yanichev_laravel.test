@@ -13,7 +13,7 @@
             </thead>
             <tbody>
             <template v-if="cats" v-for="cat in cats">
-                <tr :class="isEdit(cat.id) ? 'd-none' : cat.breed.age_average === cat.age ? 'bg-warning' : ''">
+                <tr :class="isEdit(cat.id) ? 'd-none' : cat.breed.age_average - cat.age === 1 ? 'bg-warning' : ''">
                     <td><a href="#" @click.prevent="getImage(cat.id)">{{ cat.name }}</a></td>
                     <td><img :src="cat.image" width="100" height="100" alt="" :class="cat.image ? '' : 'd-none'"></td>
                     <td>{{ cat.age }}</td>
@@ -103,7 +103,6 @@ export default {
                             cat.image = res.data[0].url;
                         }
                     })
-                    // this.catImage = res.data[0].url
                 })
         }
     }
