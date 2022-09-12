@@ -12,7 +12,7 @@
             </thead>
             <tbody>
             <template v-if="cats" v-for="cat in cats">
-                <tr :class="isEdit(cat.id) ? 'd-none' : ''">
+                <tr :class="isEdit(cat.id) ? 'd-none' : cat.breed.age_average === cat.age ? 'bg-warning' : ''">
                     <td>{{ cat.name }}</td>
                     <td>{{ cat.age }}</td>
                     <td>{{ cat.breed.name }}</td>
